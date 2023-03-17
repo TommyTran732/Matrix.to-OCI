@@ -8,5 +8,5 @@ This is my own Docker image building from [the official repository](https://gith
 - Prebuilt images are available at `ghcr.io/tommytran732/matrix.to`.
 - Don't trust random images: build yourself if you can.
 - Default Element instance is changed from [Element.io](https://app.element.io) to [ArcticFoxes.net](https://element.arcticfoxes.net)
-- The Dockerfile builds from the main branch, as the relases do not come out frequently.
+- The Dockerfile builds from the main branch, as releases do not come out frequently.
 - Images from `ghcr.io` are built every week and scanned every day for critical vulnerabilities with Trivy. I recommend that you use these images.
