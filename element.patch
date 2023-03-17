@@ -1,0 +1,14 @@
+diff --git a/src/open/clients/Element.js b/src/open/clients/Element.js
+index e43199f..badeb6b 100644
+--- a/src/open/clients/Element.js
++++ b/src/open/clients/Element.js
+@@ -18,7 +18,8 @@ import {Maturity, Platform, LinkKind,
+     FDroidLink, AppleStoreLink, PlayStoreLink, WebsiteLink} from "../types.js";
+ 
+ const trustedWebInstances = [
+-    "app.element.io",   // first one is the default one
++    "element.arcticfoxes.net", // first one is the default one
++    "app.element.io",
+     "develop.element.io",
+     "chat.fedoraproject.org",
+     "chat.fosdem.org",

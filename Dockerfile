@@ -15,9 +15,12 @@ WORKDIR /home/matrix-to
 
 RUN git clone https://github.com/matrix-org/matrix.to
 
+COPY element.patch /home/matrix-to/matrix.to
+
 WORKDIR /home/matrix-to/matrix.to
 
-RUN yarn \
+RUN git apply /home/matrix-to/matrix.to/element.patch \
+  && yarn \
   && yarn build
 
 EXPOSE 5000
