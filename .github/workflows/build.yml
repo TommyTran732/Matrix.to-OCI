@@ -18,7 +18,7 @@ env:
 
 jobs:
   build:
-    name: Build, scan & push
+    name: Build & push new image
     runs-on: "ubuntu-latest"
     permissions:
       contents: read
@@ -67,3 +67,26 @@ jobs:
         env:
           COSIGN_EXPERIMENTAL: "true"
           TAGS: ${{ steps.meta.outputs.tags }}
+          
+  scan:
+    name: Scan current image & report results
+    needs: build
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'ghcr.io/tommytran732/synapse'
+          format: 'template'
+          template: '@/contrib/sarif.tpl'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+          vuln-type: "os"
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
