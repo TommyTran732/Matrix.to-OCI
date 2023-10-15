@@ -20,6 +20,7 @@ COPY element.patch /home/matrix-to/matrix.to
 WORKDIR /home/matrix-to/matrix.to
 
 RUN git apply /home/matrix-to/matrix.to/element.patch \
+  && rm -rf .git \
   && yarn \
   && yarn build
 
