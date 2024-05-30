@@ -1,5 +1,7 @@
 # Matrix.to-Docker
 
+![Build, scan & push](https://github.com/tommytran732/Matrix.to-Docker/actions/workflows/build.yml/badge.svg)
+
 Matrix.to is a simple url redirection service for the Matrix.org ecosystem which lets users share links to matrix entities without being tied to a specific app. Stylistically it serves as a landing page for rooms and communities.
 
 This is my own Docker image building from [the official repository](https://github.com/matrix-org/matrix.to).
