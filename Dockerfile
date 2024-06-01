@@ -1,4 +1,4 @@
-ARG HARDENED_MALLOC_VERSION=2024052100
+ARG HARDENED_MALLOC_VERSION=2024053100
 
 ### Build Hardened Malloc
 FROM alpine:latest as hmalloc-builder
