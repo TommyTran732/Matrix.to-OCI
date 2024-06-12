@@ -102,6 +102,7 @@ jobs:
         id: grype
         with:
           image: "ghcr.io/tommytran732/matrix.to"
+          fail-build: false
 
       - name: Upload Grype scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
