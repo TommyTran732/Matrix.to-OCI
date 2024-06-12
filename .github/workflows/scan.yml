@@ -9,6 +9,8 @@ on:
 jobs:
   scan:
     name: Scan current image & report results
+    permissions:
+      security-events: write
     runs-on: "ubuntu-latest"
     steps:
       - name: Run Trivy vulnerability scanner
