@@ -16,5 +16,5 @@ This is my own Docker image building from [the official repository](https://gith
 ### Features & usage
 - Unprivileged image: default UID/GID is 992.
 - Based on the latest [Alpine](https://alpinelinux.org/) container which provide more recent packages while having less attack surface.
-- Daily rebuilds keeping image up-to-date.
+- Daily rebuilds keeping the image up-to-date.
 - Comes with the [hardened memory allocator](https://github.com/GrapheneOS/hardened_malloc) built from the latest tag, protecting against some heap-based buffer overflows.
