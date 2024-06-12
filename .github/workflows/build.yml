@@ -9,8 +9,8 @@ on:
     paths-ignore:
       - '**.md'
   schedule:
-    # Build the image regularly (each Saturday)
-    - cron: '0 22 * * 6'
+    # Build the image daily
+    - cron: '0 0 * * *'
 
 env:
   REGISTRY: ghcr.io
