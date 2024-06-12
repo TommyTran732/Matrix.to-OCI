@@ -43,7 +43,9 @@ WORKDIR /home/matrix-to/matrix.to
 
 RUN git apply /home/matrix-to/matrix.to/element.patch \
     && rm -rf .git \
+    && rm -rf yarn.lock \
     && yarn \
+    && yarn cache clean \
     && yarn build
 
 COPY --from=hmalloc-builder /tmp/hardened_malloc/out/libhardened_malloc.so /usr/local/lib/
