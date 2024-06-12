@@ -12,4 +12,9 @@ This is my own Docker image building from [the official repository](https://gith
 - Default Element instance is changed from [Element.io](https://app.element.io) to [ArcticFoxes.net](https://element.arcticfoxes.net)
 - The Dockerfile builds from the main branch, as releases do not come out frequently.
 - `yarn.lock` is ignored, as upstream does not bump dependencies properly.
-- The image comes with the [hardened memory allocator](https://github.com/GrapheneOS/hardened_malloc) built from the latest tag.
+
+### Features & usage
+- Unprivileged image: default UID/GID is 992.
+- Based on the latest [Alpine](https://alpinelinux.org/) container which provide more recent packages while having less attack surface.
+- Daily rebuilds keeping image up-to-date.
+- Comes with the [hardened memory allocator](https://github.com/GrapheneOS/hardened_malloc) built from the latest tag, protecting against some heap-based buffer overflows.
