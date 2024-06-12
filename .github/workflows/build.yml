@@ -67,8 +67,8 @@ jobs:
         env:
           TAGS: ${{ steps.meta.outputs.tags }}
 
-  scan:
-    name: Scan current image & report results
+  trivy:
+    name: Scan current image with Trivy
     needs: build
     permissions:
       security-events: write
@@ -88,3 +88,24 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: 'trivy-results.sarif'
+          category: trivy
+
+  clair:
+    name: Scan current image with Clair
+    needs: build
+    permissions:
+      security-events: write
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Run Clair vulnerability scanner
+        uses: quay/clair-action@main
+        with:
+          image-ref: 'ghcr.io/tommytran732/matrix.to'
+          format: sarif
+          output: clair_results.sarif
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'clair_results.sarif'
+          category: clair
