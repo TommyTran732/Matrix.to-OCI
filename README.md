@@ -1,4 +1,4 @@
-# Matrix.to-Docker
+# tommytran732/matrix.to
 
 ![Build, scan & push](https://github.com/tommytran732/Matrix.to-Docker/actions/workflows/build.yml/badge.svg)
 
