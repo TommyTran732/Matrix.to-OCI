@@ -1,31 +1,12 @@
-ARG HARDENED_MALLOC_VERSION=2024060400
-
-### Build Hardened Malloc
-FROM alpine:latest as hmalloc-builder
-
-ARG HARDENED_MALLOC_VERSION
-ARG CONFIG_NATIVE=false
-ARG VARIANT=default
-
-RUN apk -U upgrade \
-    && apk --no-cache add build-base git gnupg openssh-keygen
-    
-RUN cd /tmp \
-    && git clone --depth 1 --branch ${HARDENED_MALLOC_VERSION} https://github.com/GrapheneOS/hardened_malloc \
-    && cd hardened_malloc \
-    && wget -q https://grapheneos.org/allowed_signers -O grapheneos_allowed_signers \
-    && git config gpg.ssh.allowedSignersFile grapheneos_allowed_signers \
-    && git verify-tag $(git describe --tags) \
-    && make CONFIG_NATIVE=${CONFIG_NATIVE} VARIANT=${VARIANT}
-
-### Build Production
-
 FROM node:alpine
 
 LABEL maintainer="Thien Tran contact@tommytran.io"
 
 ARG UID=992
 ARG GID=992
+
+COPY --from=ghcr.io/polarix-containers/hardened_malloc:latest /install /usr/local/lib/
+ENV LD_PRELOAD="/usr/local/lib/libhardened_malloc.so"
 
 RUN apk -U upgrade \
     && apk --no-cache add git \
@@ -47,8 +28,6 @@ RUN git apply /home/matrix-to/matrix.to/element.patch \
     && yarn \
     && yarn cache clean \
     && yarn build
-
-COPY --from=hmalloc-builder /tmp/hardened_malloc/out/libhardened_malloc.so /usr/local/lib/
 
 ENV LD_PRELOAD="/usr/local/lib/libhardened_malloc.so"
 
